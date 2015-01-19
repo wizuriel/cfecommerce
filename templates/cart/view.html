@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if empty %}
+	<h1 style='test-align:center;'> {{ empty_message }}</h1>
+{% else %}
+
+<div class='col-sm-8 col-sm-offset-2'>
+<table class="table">
+<thead>
+  <tr>
+    <th>Item</th>
+    <th>price</th>
+    <th></th>
+  </tr>
+ </thead>
+ <tfoot>
+ 	<tr>
+ 		<td></td>
+ 		<td></td>
+ 		<td>Total: {{ cart.total }}</td>
+ 	</tr>
+ </tfoot>
+{% for item in cart.products.all %}
+
+  <tr>
+    <td>{{ item }}</td>
+    <td>${{ item.price }}</td>
+    <td><a href='{% url "update_cart" item.slug %}'>remove</a></td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+
+{% endif %}
+
+{% endblock %}
